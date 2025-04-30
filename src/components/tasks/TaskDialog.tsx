@@ -185,14 +185,14 @@ const TaskDialog = ({ isOpen, onClose, task }: TaskDialogProps) => {
               <div className="space-y-2">
                 <Label htmlFor="assignedTo">Assign To</Label>
                 <Select 
-                  value={assignedTo || ""}
+                  value={assignedTo || "unassigned"}
                   onValueChange={setAssignedTo}
                 >
                   <SelectTrigger id="assignedTo">
                     <SelectValue placeholder="Select agent" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="">Unassigned</SelectItem>
+                    <SelectItem value="unassigned">Unassigned</SelectItem>
                     {agents.map((agent) => (
                       <SelectItem key={agent.id} value={agent.id}>
                         {agent.name}

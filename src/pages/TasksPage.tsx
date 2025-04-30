@@ -13,8 +13,8 @@ const TasksPage = () => {
   const { user, isManager } = useAuth();
   const [tasks, setTasks] = useState<Task[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [statusFilter, setStatusFilter] = useState<string>("");
-  const [priorityFilter, setPriorityFilter] = useState<string>("");
+  const [statusFilter, setStatusFilter] = useState<string>("all");
+  const [priorityFilter, setPriorityFilter] = useState<string>("all");
   const [showAddDialog, setShowAddDialog] = useState(false);
 
   const loadTasks = () => {
@@ -35,8 +35,8 @@ const TasksPage = () => {
     const matchesSearch = task.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          task.description.toLowerCase().includes(searchTerm.toLowerCase());
     
-    const matchesStatus = statusFilter === "" || task.status === statusFilter;
-    const matchesPriority = priorityFilter === "" || task.priority === priorityFilter;
+    const matchesStatus = statusFilter === "all" || task.status === statusFilter;
+    const matchesPriority = priorityFilter === "all" || task.priority === priorityFilter;
     
     return matchesSearch && matchesStatus && matchesPriority;
   });
@@ -75,11 +75,11 @@ const TasksPage = () => {
           <SelectTrigger>
             <div className="flex items-center">
               <Filter className="mr-2 h-4 w-4" />
-              {statusFilter ? `Status: ${statusFilter}` : "Filter by Status"}
+              {statusFilter !== "all" ? `Status: ${statusFilter}` : "Filter by Status"}
             </div>
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="">All Statuses</SelectItem>
+            <SelectItem value="all">All Statuses</SelectItem>
             <SelectItem value="pending">Pending</SelectItem>
             <SelectItem value="in-progress">In Progress</SelectItem>
             <SelectItem value="completed">Completed</SelectItem>
@@ -91,11 +91,11 @@ const TasksPage = () => {
           <SelectTrigger>
             <div className="flex items-center">
               <Filter className="mr-2 h-4 w-4" />
-              {priorityFilter ? `Priority: ${priorityFilter}` : "Filter by Priority"}
+              {priorityFilter !== "all" ? `Priority: ${priorityFilter}` : "Filter by Priority"}
             </div>
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="">All Priorities</SelectItem>
+            <SelectItem value="all">All Priorities</SelectItem>
             <SelectItem value="high">High</SelectItem>
             <SelectItem value="medium">Medium</SelectItem>
             <SelectItem value="low">Low</SelectItem>
