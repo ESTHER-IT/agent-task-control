@@ -6,6 +6,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useAuth } from "@/contexts/AuthContext";
 import { BarChart as BarChartIcon, PieChart, Users, CheckCircle2 } from "lucide-react";
 import TaskStatusBadge from "@/components/tasks/TaskStatusBadge";
+import { Badge } from "@/components/ui/badge";
 import { format } from "date-fns";
 
 const ReportsPage = () => {
