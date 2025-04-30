@@ -28,10 +28,17 @@ const DashboardPage = () => {
   useEffect(() => {
     // Fetch tasks based on user role
     let fetchedTasks: Task[];
+    
+    // Debug log to see what user ID is being used
+    console.log("Current user:", user);
+    
     if (isManager) {
       fetchedTasks = DataService.getTasks();
     } else {
+      // For agents, we need to ensure we're using the correct ID format
+      // The AuthContext user.id for agents should be "a1", "a2", etc.
       fetchedTasks = DataService.getTasksByAgentId(user?.id || "");
+      console.log("Tasks fetched for agent:", fetchedTasks);
     }
     
     setTasks(fetchedTasks);

@@ -58,7 +58,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       // This simulates a login API call with a delay
       await new Promise(resolve => setTimeout(resolve, 500));
 
-      // Demo users for testing
+      // Debug users for testing
       if (email === "manager@example.com" && password === "manager") {
         const user: User = {
           id: "m1",
@@ -68,15 +68,18 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         };
         setUser(user);
         localStorage.setItem("bpo_user", JSON.stringify(user));
+        console.log("Manager login successful:", user);
       } else if (email === "agent@example.com" && password === "agent") {
+        // IMPORTANT: Fix - This should be "a1" to match the task assignments in DataService
         const user: User = {
-          id: "a1",
-          name: "Agent User",
+          id: "a1", // Ensuring this matches the assignedTo field in tasks
+          name: "John Smith", // Using the actual name that matches the agent in DataService
           email: "agent@example.com",
           role: "agent"
         };
         setUser(user);
         localStorage.setItem("bpo_user", JSON.stringify(user));
+        console.log("Agent login successful:", user);
       } else {
         throw new Error("Invalid credentials");
       }
