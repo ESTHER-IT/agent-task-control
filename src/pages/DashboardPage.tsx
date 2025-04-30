@@ -4,7 +4,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { DataService, Task, TaskStatus } from "@/lib/models";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { BarChart, CheckCircle, Clock, AlertTriangle } from "lucide-react";
+import { BarChart, CheckCircle, Clock, AlertTriangle, UserRound } from "lucide-react";
 
 import TaskList from "@/components/tasks/TaskList";
 
@@ -140,6 +140,26 @@ const DashboardPage = () => {
           </CardContent>
         </Card>
       </div>
+
+      {!isManager && (
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between pb-2">
+            <CardTitle className="text-sm font-medium">Assigned By</CardTitle>
+            <UserRound className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            {tasks.length > 0 ? (
+              <div className="text-sm">
+                {/* Display manager assignment info for agents */}
+                <p>Your tasks were assigned by a project manager.</p>
+                {/* This could be enhanced with actual manager name if available in your data model */}
+              </div>
+            ) : (
+              <p className="text-sm text-muted-foreground">No tasks assigned yet</p>
+            )}
+          </CardContent>
+        </Card>
+      )}
       
       <Tabs defaultValue="recent">
         <TabsList>
